@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "RestaurantDDD.Web": {
+    "RestaurantDDD.Presentation": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

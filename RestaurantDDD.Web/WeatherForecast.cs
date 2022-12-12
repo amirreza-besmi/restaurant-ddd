@@ -1,4 +1,4 @@
-namespace RestaurantDDD.Web
+namespace RestaurantDDD.Presentation
 {
     public class WeatherForecast
     {
