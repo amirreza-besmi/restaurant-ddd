@@ -544,6 +544,10 @@ using System.Threading.Tasks;
 
 namespace RestaurantDDD.Application.Foods.Commands;
 
-public class FoodCreateCommand : IRequest<long>
+public class FoodCreateCommand : IRequest<long> // Usually flat (not using object in them)
 {
+    public string Title { get; set; }
+    public decimal Price { get; set; }
+    public string Description { get; set; }
+    public bool IsActive { get; set; }
 }
