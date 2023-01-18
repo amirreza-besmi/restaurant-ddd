@@ -1,11 +1,32 @@
 ﻿using MediatR;
+using RestaurantDDD.Domain.Entities;
+using RestaurantDDD.Infrastructure.Data;
 
 namespace RestaurantDDD.Application.Foods.Commands;
 
-internal class FoodCreateCommandHandler : IRequestHandler<FoodCreateCommand, long>
+class FoodCreateCommandHandler : IRequestHandler<FoodCreateCommand, long>
 {
-    public Task<long> Handle(FoodCreateCommand request, CancellationToken cancellationToken)
+    private readonly ApplicationDbContext _dbContext; // TODO: Use repository!
+
+    public FoodCreateCommandHandler(ApplicationDbContext dbContext)
     {
-        throw new NotImplementedException();
+        _dbContext = dbContext;
+    }
+
+    public async Task<long> Handle(FoodCreateCommand request, CancellationToken cancellationToken)
+    {
+        var food = new Food()
+        {
+            Title = request.Title,
+            Price = request.Price,
+            Description = request.Description,
+            IsActive = request.IsActive
+        };
+
+        var result = _dbContext.Food.Add(food);
+        
+        await _dbContext.SaveChangesAsync();
+
+        return food.Id; // Or: result.Entity.Id
     }
 }
